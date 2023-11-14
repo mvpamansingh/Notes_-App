@@ -38,11 +38,21 @@ class NotesViewModel @Inject constructor(
     {
         when(e)
         {
-            NoteEvent.clearAll -> TODO()
-            is NoteEvent.deleteContact -> TODO()
-            is NoteEvent.noteContentChanged -> TODO()
-            NoteEvent.save -> TODO()
-            is NoteEvent.titleChanged -> TODO()
+            NoteEvent.clearAll ->
+            {
+
+                viewModelScope.launch(Dispatchers.IO) {
+                    dao.clearTable()
+                }
+            }
+            is NoteEvent.deleteContact ->
+            {
+                viewModelScope.launch(Dispatchers.IO) {
+                    dao.deleteNotes(e.v)
+                }
+            }
+
+
         }
     }
 

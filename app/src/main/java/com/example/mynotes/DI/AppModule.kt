@@ -41,8 +41,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun notesDaoIml(notesDao: NotesDao)
+    fun notesDaoIml(notesDao: NotesDao):NotesDaoImpl
     {
-        NotesDaoImpl(notesDao)
+         return     NotesDaoImpl(notesDao)
     }
 }
