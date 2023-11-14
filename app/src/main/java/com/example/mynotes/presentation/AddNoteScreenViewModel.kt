@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynotes.Data.NotesDaoImpl
 import com.example.mynotes.Data.NotesEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,6 +12,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+
+
+
+
+@HiltViewModel
 class AddNoteScreenViewModel @Inject constructor(
     private val dao:NotesDaoImpl
 ):ViewModel() {
@@ -48,8 +55,8 @@ class AddNoteScreenViewModel @Inject constructor(
                     if(state.value.notesId == null){
 
                         dao.insertNotes(notesEntity = NotesEntity(
-                            notesContent = state.value.notesContentS,
-                            title = state.value.titleS
+                            title= state.value.titleS,
+                            notesContent = state.value.notesContentS
                         ))
 
 
