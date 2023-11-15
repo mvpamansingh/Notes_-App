@@ -25,6 +25,8 @@ class AddNoteScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(NoteState())
     val state = _state.asStateFlow()
 
+    private val _addnotescreenstate= MutableStateFlow(AddNoteScreenstate())
+    val addnotescreenstate= _addnotescreenstate.asStateFlow()
 
     fun eventAddScreen(e:AddNoteScreenEvent)
     {
@@ -33,37 +35,35 @@ class AddNoteScreenViewModel @Inject constructor(
         {
             is AddNoteScreenEvent.noteContentChanged ->
             {
-                _state.update {
+                _addnotescreenstate.update {
                     it.copy(
-                        notesContentS = e.v
+                        addNotescreenContent = e.v
                     )
                 }
             }
             AddNoteScreenEvent.save ->{
 
 
-
-
                 viewModelScope.launch(Dispatchers.IO)
                 {
-                    if(state.value.titleS.isBlank())
+                    if(addnotescreenstate.value.addnotescreeenTitle.isBlank())
                     {
                         return@launch
                     }
 
 
-                    if(state.value.notesId == null){
+                    if(addnotescreenstate.value.notesId == null){
 
                         dao.insertNotes(notesEntity = NotesEntity(
-                            title= state.value.titleS,
-                            notesContent = state.value.notesContentS
+                            title= addnotescreenstate.value.addnotescreeenTitle,
+                            notesContent = addnotescreenstate.value.addNotescreenContent
                         ))
 
 
-                        _state.update {
+                        _addnotescreenstate.update {
                             it.copy(
-                                titleS = "",
-                                notesContentS = ""
+                                addnotescreeenTitle = "",
+                                addNotescreenContent = ""
                             )
                         }
 
@@ -77,9 +77,10 @@ class AddNoteScreenViewModel @Inject constructor(
             }
             is AddNoteScreenEvent.titleChanged ->
             {
-                _state.update {
+
+                _addnotescreenstate.update {
                     it.copy(
-                        titleS = e.v
+                        addnotescreeenTitle = e.v
                     )
                 }
             }
