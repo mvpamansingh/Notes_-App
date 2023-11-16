@@ -31,11 +31,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val vm= hiltViewModel<NotesViewModel>()
-                    val addscreenVM = hiltViewModel<AddNoteScreenViewModel>()
-                    val state by vm.state.collectAsState()
 
-                    AppNavigator(state = state, event =vm::event, eventAddNoteScreenEvent = addscreenVM::eventAddScreen)
+
+                    AppNavigator()
                     //ContactScreen(state = state, event = vm::events)
 
 
