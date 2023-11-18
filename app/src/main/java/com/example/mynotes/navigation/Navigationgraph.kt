@@ -39,8 +39,8 @@ fun AppNavigator()
         composable(NavigationRoutes.AddNoteScreen.routes)
         {
             val addscreenVM = hiltViewModel<AddNoteScreenViewModel>()
-            val state by addscreenVM.state.collectAsState()
-           AddNoteScreen(state = state, eventAddNoteScreenEvent =addscreenVM::eventAddScreen, navigationcontroller )
+            val addstate by addscreenVM.addnotescreenstate.collectAsState()
+           AddNoteScreen(state = addstate, eventAddNoteScreenEvent =addscreenVM::eventAddScreen, navigationcontroller )
         }
 
     }

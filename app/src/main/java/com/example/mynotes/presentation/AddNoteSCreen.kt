@@ -18,7 +18,7 @@ import com.example.mynotes.navigation.NavigationRoutes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddNoteScreen(state: NoteState,
+fun AddNoteScreen(state: AddNoteScreenstate,
                   eventAddNoteScreenEvent: (AddNoteScreenEvent)->Unit,
                   navigationController: NavController)
 {
@@ -26,8 +26,8 @@ fun AddNoteScreen(state: NoteState,
     Column(verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        OutlinedTextField(value = state.titleS, onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.titleChanged(it))})
-        OutlinedTextField(value = state.notesContentS, onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.noteContentChanged(it))})
+        OutlinedTextField(value = state.addnotescreeenTitle, onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.titleChanged(it))})
+        OutlinedTextField(value = state.addNotescreenContent, onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.noteContentChanged(it))})
 
         Spacer(modifier =  Modifier.height(20.dp))
         Button(onClick = {
