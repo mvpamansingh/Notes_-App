@@ -34,7 +34,7 @@ fun AddNoteScreen(state: AddNoteScreenstate,
 
         OutlinedTextField(value = state.addnotescreeenTitle,
             onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.titleChanged(it))}
-        , label = { Text(text = "Title", fontSize = 24.sp, fontFamily = FontFamily.Cursive)}, )
+        , label = { Text(text = "Title", fontSize = 24.sp, fontFamily = FontFamily.Cursive)}, singleLine = true )
 
         Divider(
             color = Color.Black,
@@ -43,7 +43,7 @@ fun AddNoteScreen(state: AddNoteScreenstate,
         )
         OutlinedTextField(value = state.addNotescreenContent,
             onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.noteContentChanged(it))}
-        ,label = { Text(text = "Type your Dreams", fontSize = 19.sp, fontFamily = FontFamily.Cursive)})
+        ,label = { Text(text = "Type your Dreams", fontSize = 19.sp, fontFamily = FontFamily.Cursive)}, singleLine = true)
 
         Spacer(modifier =  Modifier.height(20.dp))
         Button(onClick = {

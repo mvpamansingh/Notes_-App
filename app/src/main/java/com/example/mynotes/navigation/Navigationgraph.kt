@@ -40,6 +40,7 @@ fun AppNavigator()
         {
             val addscreenVM = hiltViewModel<AddNoteScreenViewModel>()
             val addstate by addscreenVM.addnotescreenstate.collectAsState()
+            
            AddNoteScreen(state = addstate, eventAddNoteScreenEvent =addscreenVM::eventAddScreen, navigationcontroller )
         }
 
