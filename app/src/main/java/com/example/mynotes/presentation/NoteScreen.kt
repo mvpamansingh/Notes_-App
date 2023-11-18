@@ -98,6 +98,7 @@ fun NoteCard(notelist:NotesEntity, event:(NoteEvent)->Unit)
             IconButton(
                 onClick = {
                        //   event(NoteEvent.deleteContact(notelist))
+                          event(NoteEvent.deleteContact(notelist))
                           },
                 modifier = Modifier
                     .align(Alignment.CenterVertically) // Align the button vertically
