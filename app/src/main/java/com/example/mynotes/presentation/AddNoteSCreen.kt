@@ -43,7 +43,7 @@ fun AddNoteScreen(state: AddNoteScreenstate,
         )
         OutlinedTextField(value = state.addNotescreenContent,
             onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.noteContentChanged(it))}
-        ,label = { Text(text = "Title", fontSize = 19.sp, fontFamily = FontFamily.Cursive)})
+        ,label = { Text(text = "Type your Dreams", fontSize = 19.sp, fontFamily = FontFamily.Cursive)})
 
         Spacer(modifier =  Modifier.height(20.dp))
         Button(onClick = {
