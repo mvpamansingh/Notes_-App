@@ -1,4 +1,4 @@
-package com.example.mynotes.presentation
+package com.example.mynotes.presentation.mainscreenUI
 
 import com.example.mynotes.Data.NotesEntity
 
@@ -17,5 +17,5 @@ sealed interface NoteEvent
 
 
     data class deleteContact(val v : NotesEntity): NoteEvent
-
+    data class onSearchQueryChanged(val v: String):NoteEvent
 }

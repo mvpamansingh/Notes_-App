@@ -7,14 +7,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.example.mynotes.presentation.AddNoteScreen
-import com.example.mynotes.presentation.AddNoteScreenEvent
-import com.example.mynotes.presentation.AddNoteScreenViewModel
-import com.example.mynotes.presentation.NoteEvent
-import com.example.mynotes.presentation.NoteScreen
-import com.example.mynotes.presentation.NoteState
-import com.example.mynotes.presentation.NotesViewModel
+import com.example.mynotes.presentation.AddScreenUi.AddNoteScreen
+import com.example.mynotes.presentation.AddScreenUi.AddNoteScreenViewModel
+import com.example.mynotes.presentation.mainscreenUI.NoteScreen
+import com.example.mynotes.presentation.mainscreenUI.NotesViewModel
 
 
 @Composable
@@ -34,7 +30,7 @@ fun AppNavigator()
             val vm= hiltViewModel<NotesViewModel>()
 
             val state by vm.state.collectAsState()
-            NoteScreen(state =state , event =vm::event ,navigationcontroller)
+            NoteScreen(state =state , event =vm::event,vm ,navigationcontroller)
         }
         composable(NavigationRoutes.AddNoteScreen.routes)
         {

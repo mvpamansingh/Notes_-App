@@ -1,17 +1,13 @@
-package com.example.mynotes.presentation
+package com.example.mynotes.presentation.mainscreenUI
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -19,15 +15,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -41,8 +42,12 @@ import com.example.mynotes.navigation.NavigationRoutes
 @Composable
 fun NoteScreen(state: NoteState,
                event: (NoteEvent)->Unit,
+               viewModel: NotesViewModel,
                navigationController:NavController)
 {
+    //val state = viewModel.state.collectAsState().value
+   // val filteredNotes = viewModel.filteredNotes.collectAsState().value
+    //val searchQuery = rememberSaveable { mutableStateOf("") }
 
     Scaffold(
         floatingActionButton = {
@@ -57,7 +62,7 @@ fun NoteScreen(state: NoteState,
     ) {paddingValues ->
 
 
-//
+//linear
 //        LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp),
 //            contentPadding = PaddingValues(horizontal = 10.dp)
 //        ){
@@ -76,15 +81,42 @@ fun NoteScreen(state: NoteState,
             Text(text = "Notes", fontSize = 32.sp, modifier = Modifier.padding(start = 10.dp))
             
             Spacer(modifier = Modifier.height(25.dp))
+
+
+
+            SearchBar(
+                state = state,
+//                onQueryChanged = {
+////                    searchQuery.value = it
+////                    viewModel.onSearchQueryChanged(it)
+//                    event(NoteEvent.onSearchQueryChanged(it))
+//                },
+                event= event
+
+            )
+
+//            LazyVerticalStaggeredGrid(
+//                columns = StaggeredGridCells.Fixed(2),
+//                verticalItemSpacing = 4.dp,
+//                horizontalArrangement = Arrangement.spacedBy(4.dp),
+//                content = {
+//
+//                    items(state.listOfNotes)
+//                    {notelist->
+//                        NoteCard(notelist = notelist, event = event)
+//                    }
+//                },
+//                modifier = Modifier.fillMaxSize()
+//            )
+
             LazyVerticalStaggeredGrid(
                 columns = StaggeredGridCells.Fixed(2),
                 verticalItemSpacing = 4.dp,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 content = {
 
-                    items(state.listOfNotes)
-                    {notelist->
-                        NoteCard(notelist = notelist, event = event)
+                    items(state.filteredNotes) { notelist ->
+                        NoteCard(notelist = notelist, event = { event -> viewModel.event(event) })
                     }
                 },
                 modifier = Modifier.fillMaxSize()
@@ -140,4 +172,19 @@ fun NoteCard(notelist:NotesEntity, event:(NoteEvent)->Unit)
     }
 
 
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchBar(state: NoteState,  event:(NoteEvent)->Unit) {
+    OutlinedTextField(
+        value = state.searchQuery,
+        onValueChange = { event(NoteEvent.onSearchQueryChanged(it)) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        placeholder = { Text("Search here...") },
+        singleLine = true,
+        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search Icon") }
+    )
 }

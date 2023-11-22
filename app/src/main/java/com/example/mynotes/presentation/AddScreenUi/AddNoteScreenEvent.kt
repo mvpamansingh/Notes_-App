@@ -1,4 +1,4 @@
-package com.example.mynotes.presentation
+package com.example.mynotes.presentation.AddScreenUi
 
 sealed interface AddNoteScreenEvent
 {

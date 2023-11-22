@@ -1,9 +1,10 @@
-package com.example.mynotes.presentation
+package com.example.mynotes.presentation.AddScreenUi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynotes.Data.NotesDaoImpl
 import com.example.mynotes.Data.NotesEntity
+import com.example.mynotes.presentation.mainscreenUI.NoteState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,7 +29,7 @@ class AddNoteScreenViewModel @Inject constructor(
     private val _addnotescreenstate= MutableStateFlow(AddNoteScreenstate())
     val addnotescreenstate= _addnotescreenstate.asStateFlow()
 
-    fun eventAddScreen(e:AddNoteScreenEvent)
+    fun eventAddScreen(e: AddNoteScreenEvent)
     {
 
         when(e)

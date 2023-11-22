@@ -1,4 +1,4 @@
-package com.example.mynotes.presentation
+package com.example.mynotes.presentation.AddScreenUi
 
 data class AddNoteScreenstate(
 

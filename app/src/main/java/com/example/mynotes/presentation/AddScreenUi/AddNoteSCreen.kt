@@ -1,4 +1,4 @@
-package com.example.mynotes.presentation
+package com.example.mynotes.presentation.AddScreenUi
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,6 +41,7 @@ fun AddNoteScreen(state: AddNoteScreenstate,
             thickness = 1.dp, // You can adjust the thickness of the line
             modifier = Modifier.padding(vertical = 8.dp) // Optional padding around the divider
         )
+
         OutlinedTextField(value = state.addNotescreenContent,
             onValueChange = {eventAddNoteScreenEvent(AddNoteScreenEvent.noteContentChanged(it))}
         ,label = { Text(text = "Type your Dreams", fontSize = 19.sp, fontFamily = FontFamily.Cursive)}, singleLine = true)
@@ -52,6 +53,7 @@ fun AddNoteScreen(state: AddNoteScreenstate,
         }) {
             Text(text = "Save")
         }
+
     }
 }
 
